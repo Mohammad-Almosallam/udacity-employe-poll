@@ -4,15 +4,17 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   TableCaption,
   TableContainer,
   Box,
+  Image,
 } from "@chakra-ui/react";
-function Leaderboard() {
+import { connect } from "react-redux";
+function Leaderboard(props) {
+  console.log(props);
   return (
     <>
       <Nav />
@@ -27,21 +29,24 @@ function Leaderboard() {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>inches</Td>
-                <Td isNumeric>25.4</Td>
-                <Td isNumeric>25.4</Td>
-              </Tr>
-              <Tr>
-                <Td>feet</Td>
-                <Td isNumeric>30.48</Td>
-                <Td isNumeric>30.48</Td>
-              </Tr>
-              <Tr>
-                <Td>yards</Td>
-                <Td isNumeric>0.91444</Td>
-                <Td isNumeric>0.91444</Td>
-              </Tr>
+              {props.rankOrderIds.map((id, index) => {
+                return (
+                  <Tr key={index}>
+                    <Td
+                      display={"flex"}
+                      fontWeight={"bold"}
+                      alignItems="center"
+                    >
+                      <Image w={"40px"} src={props.users[id].avatarURL} />{" "}
+                      {props.users[id].name}
+                    </Td>
+                    <Td isNumeric>
+                      {Object.keys(props.users[id].answers).length}
+                    </Td>
+                    <Td isNumeric>{props.users[id].questions.length}</Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
 
             <TableCaption>Made with ❤️ by Mohammad Almosallam</TableCaption>
@@ -52,4 +57,17 @@ function Leaderboard() {
   );
 }
 
-export default Leaderboard;
+const mapStateToProps = ({ users }) => {
+  return {
+    rankOrderIds: Object.keys(users).sort((a, b) => {
+      return (
+        Object.keys(users[b].answers).length +
+        users[b].questions.length -
+        (Object.keys(users[a].answers).length + users[b].questions.length)
+      );
+    }),
+    users,
+  };
+};
+
+export default connect(mapStateToProps)(Leaderboard);

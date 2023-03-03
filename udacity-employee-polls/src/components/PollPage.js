@@ -18,8 +18,7 @@ import Nav from "./Nav";
 import { withRouter, formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
 function PollPage(props) {
-  const { name, timestamp, id, hasAnswered, avatar, optionOne, optionTwo } =
-    props.question;
+  const { name, hasAnswered, avatar, optionOne, optionTwo } = props.question;
   console.log(props);
   function calcPercentage(numOfVotes) {
     const numOptionOneVotes = optionOne.votes.length;

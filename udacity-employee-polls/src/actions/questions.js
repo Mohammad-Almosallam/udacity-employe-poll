@@ -1,5 +1,5 @@
-import { saveQuestionAnswer, saveQuestion } from "../utils/api";
-import { showLoading, hideLoading } from "react-redux-loading-bar";
+// import { saveQuestionAnswer, saveQuestion } from "../utils/api";
+// import { showLoading, hideLoading } from "react-redux-loading-bar";
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const TOGGLE_TWEET = "TOGGLE_TWEET";
 export const ADD_TWEET = "ADD_TWEET";

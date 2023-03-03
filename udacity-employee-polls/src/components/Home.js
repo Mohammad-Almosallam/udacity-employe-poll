@@ -35,6 +35,7 @@ function Home(props) {
                 if (!hasDone) {
                   return <Poll key={id} id={id} />;
                 }
+                return "";
               })}
             </SimpleGrid>
           </Box>
@@ -59,6 +60,7 @@ function Home(props) {
                 if (hasDone) {
                   return <Poll key={id} id={id} />;
                 }
+                return "";
               })}
             </SimpleGrid>
           </Box>

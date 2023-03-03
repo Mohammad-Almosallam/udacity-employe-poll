@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Menu,
   MenuButton,
@@ -16,7 +16,6 @@ import { setAuthedUser } from "../actions/authedUser";
 import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  //   const [userSelected, setUserSelected] = useState("");
   const navigate = useNavigate();
 
   function setUser(userId) {
