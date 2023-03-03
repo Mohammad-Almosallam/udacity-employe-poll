@@ -10,7 +10,6 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
-  StatArrow,
   StatGroup,
   Text,
 } from "@chakra-ui/react";
@@ -19,14 +18,18 @@ import Nav from "./Nav";
 import { withRouter, formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
 function PollPage(props) {
+  const { name, timestamp, id, hasAnswered, avatar, optionOne, optionTwo } =
+    props.question;
+  console.log(props);
   function calcPercentage(numOfVotes) {
-    const numOptionOneVotes = props.question.optionOne.votes.length;
-    const numOptionTwoVotes = props.question.optionTwo.votes.length;
+    const numOptionOneVotes = optionOne.votes.length;
+    const numOptionTwoVotes = optionTwo.votes.length;
 
     const total = numOptionOneVotes + numOptionTwoVotes;
 
     return Math.floor((numOfVotes / total) * 100);
   }
+
   return (
     <>
       <Nav />
@@ -37,12 +40,17 @@ function PollPage(props) {
       >
         <Flex w="70%" alignItems={"center"} flexDir={"column"}>
           <Box>
-            <Text fontSize={"4xl"} fontWeight={"bold"}>
-              {props.question.name} asks
+            <Image w={"200px"} m={"auto"} src={avatar} />
+          </Box>
+          <Box>
+            <Text fontSize={"4xl"} fontWeight={"thin"}>
+              {name} asks
             </Text>
           </Box>
-          <Box mt={"1.5rem"}>
-            <Image src={props.question.avatar} />
+          <Box>
+            <Text fontSize={"4xl"} fontWeight={"bold"}>
+              Would you rather...
+            </Text>
           </Box>
           <Flex w={"100%"} mt={"3rem"} gap={"1rem"}>
             <Flex w={"100%"} flexDir={"column"} gap={".5rem"}>
@@ -51,14 +59,18 @@ function PollPage(props) {
                 <Input
                   disabled
                   placeholder="mysite"
-                  value={props.question.optionOne.text}
+                  value={optionOne.text}
                   color={"black"}
                   fontSize={"1.2rem"}
                 />
               </InputGroup>
               <Button
-                isDisabled={props.question.hasAnswered}
-                colorScheme={"facebook"}
+                isDisabled={hasAnswered}
+                colorScheme={
+                  optionOne.votes.includes(props.authedUser)
+                    ? "green"
+                    : "facebook"
+                }
                 w={"100%"}
               >
                 Choose A
@@ -70,42 +82,44 @@ function PollPage(props) {
                 <Input
                   disabled
                   placeholder="mysite"
-                  value={props.question.optionTwo.text}
+                  value={optionTwo.text}
                   color={"black"}
                   fontSize={"1.2rem"}
                 />
               </InputGroup>
               <Button
-                isDisabled={props.question.hasAnswered}
-                colorScheme={"facebook"}
+                isDisabled={hasAnswered}
+                colorScheme={
+                  optionTwo.votes.includes(props.authedUser)
+                    ? "green"
+                    : "facebook"
+                }
                 w={"100%"}
               >
                 Choose B
               </Button>
             </Flex>
           </Flex>
-          {props.question.hasAnswered && (
+          {hasAnswered && (
             <Flex w={"100%"} mt={"3rem"}>
               <StatGroup w={"inherit"}>
                 <Stat>
                   <StatLabel fontSize={"1rem"}>Number of votes</StatLabel>
-                  <StatNumber fontSize={"3rem"}>
-                    {props.question.optionOne.votes.length}
+                  <StatNumber fontWeight={"extrabold"} fontSize={"3rem"}>
+                    {optionOne.votes.length}
                   </StatNumber>
                   <StatHelpText fontSize={"1.2rem"} pl={"0.7rem"}>
-                    {calcPercentage(props.question.optionOne.votes.length) +
-                      "%"}
+                    {calcPercentage(optionOne.votes.length) + "%"}
                   </StatHelpText>
                 </Stat>
 
                 <Stat>
                   <StatLabel fontSize={"1rem"}>Number of votes</StatLabel>
-                  <StatNumber fontSize={"3rem"}>
-                    {props.question.optionTwo.votes.length}
+                  <StatNumber fontWeight={"extrabold"} fontSize={"3rem"}>
+                    {optionTwo.votes.length}
                   </StatNumber>
                   <StatHelpText fontSize={"1.2rem"} pl={"0.7rem"}>
-                    {calcPercentage(props.question.optionTwo.votes.length) +
-                      "%"}
+                    {calcPercentage(optionTwo.votes.length) + "%"}
                   </StatHelpText>
                 </Stat>
               </StatGroup>
@@ -124,6 +138,7 @@ const mapStateToProps = ({ authedUser, questions, users }, props) => {
     question: question
       ? formatQuestion(question, users[question.author], authedUser)
       : null,
+    authedUser,
   };
 };
 export default withRouter(connect(mapStateToProps)(PollPage));

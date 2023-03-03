@@ -22,7 +22,7 @@ function Home(props) {
             overflow={"hidden"}
           >
             <Text my={"0.5rem"} fontSize={"3xl"} fontWeight={"bold"}>
-              New Questions
+              New Questions ✨
             </Text>
             <Divider mb={"1rem"} />
             <SimpleGrid
@@ -46,7 +46,7 @@ function Home(props) {
             overflow={"hidden"}
           >
             <Text my={"0.5rem"} fontSize={"3xl"} fontWeight={"bold"}>
-              Done
+              Done ✅
             </Text>
             <Divider mb={"1rem"} />
             <SimpleGrid

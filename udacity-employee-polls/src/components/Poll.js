@@ -8,24 +8,36 @@ import {
   CardHeader,
   Box,
   CardFooter,
+  Badge,
   Button,
   Heading,
+  Image,
 } from "@chakra-ui/react";
 import { formatDate } from "../utils/helper";
 import { IoChevronForwardOutline } from "react-icons/io5";
 function Poll(props) {
-  console.log(props);
-  const { name, timestamp, id } = props.question;
+  const { name, timestamp, id, hasAnswered, avatar } = props.question;
 
   if (props.question === null) {
     return <h1>This question doesnt exist</h1>;
   }
 
   return (
-    <Card>
+    <Card pos={"relative"}>
+      <Badge
+        ml="1"
+        w={"fit-content"}
+        pos={"absolute"}
+        top={"10px"}
+        left={"10px"}
+        colorScheme={hasAnswered ? "yellow" : "green"}
+      >
+        {hasAnswered ? "Done" : "New"}
+      </Badge>
       <CardHeader>
+        <Image w={"100px"} m={"auto"} src={avatar} />
         <Heading size="md"> {name}</Heading>
-        <Text>{formatDate(timestamp)}</Text>
+        <Text fontWeight={"thin"}>{formatDate(timestamp)}</Text>
       </CardHeader>
       <CardFooter>
         <Box w={"100%"}>
