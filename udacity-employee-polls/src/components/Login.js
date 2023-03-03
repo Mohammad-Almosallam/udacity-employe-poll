@@ -49,6 +49,7 @@ function Login(props) {
                       setUser(eachUser.id);
                     }}
                     minH="48px"
+                    key={eachUser.id}
                   >
                     <Image
                       boxSize="2rem"

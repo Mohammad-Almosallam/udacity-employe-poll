@@ -1,11 +1,12 @@
 import React from "react";
 import { formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Text,
   Card,
   CardHeader,
-  CardBody,
+  Box,
   CardFooter,
   Button,
   Heading,
@@ -14,8 +15,7 @@ import { formatDate } from "../utils/helper";
 import { IoChevronForwardOutline } from "react-icons/io5";
 function Poll(props) {
   console.log(props);
-  const { avatar, hasAnswered, name, optionOne, optionTwo, timestamp } =
-    props.question;
+  const { name, timestamp, id } = props.question;
 
   if (props.question === null) {
     return <h1>This question doesnt exist</h1>;
@@ -28,10 +28,14 @@ function Poll(props) {
         <Text>{formatDate(timestamp)}</Text>
       </CardHeader>
       <CardFooter>
-        <Button w={"100%"} colorScheme={"teal"}>
-          Show
-          <IoChevronForwardOutline />
-        </Button>
+        <Box w={"100%"}>
+          <Link to={`/questions/${id}`}>
+            <Button w={"100%"} display={"flex"} colorScheme={"teal"}>
+              Show
+              <IoChevronForwardOutline />
+            </Button>
+          </Link>
+        </Box>
       </CardFooter>
     </Card>
   );

@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 
 function Nav(props) {
-  console.log(props.avatarURL);
   return (
     <Box>
       <Flex alignItems={"center"} p={"2rem"} justifyContent={"space-between"}>
