@@ -37,7 +37,7 @@ function PollPage(props) {
     dispatch(
       handleSubmitQuestionAnswer({
         authedUser: authedUser,
-        id: question.id,
+        qid: question.id,
         answer: answerValue,
       })
     );
