@@ -63,7 +63,7 @@ const mapStateToProps = ({ users }) => {
       return (
         Object.keys(users[b].answers).length +
         users[b].questions.length -
-        (Object.keys(users[a].answers).length + users[b].questions.length)
+        (Object.keys(users[a].answers).length + users[a].questions.length)
       );
     }),
     users,
