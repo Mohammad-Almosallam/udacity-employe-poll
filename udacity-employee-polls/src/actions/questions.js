@@ -1,7 +1,7 @@
-// import { saveQuestionAnswer, saveQuestion } from "../utils/api";
+import { saveQuestionAnswer, saveQuestion } from "../utils/api";
 // import { showLoading, hideLoading } from "react-redux-loading-bar";
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
-export const TOGGLE_TWEET = "TOGGLE_TWEET";
+export const SUBMIT_QUESTION = "SUBMIT_QUESTION";
 export const ADD_TWEET = "ADD_TWEET";
 
 export function receiveQuestions(questions) {
@@ -29,23 +29,18 @@ export function receiveQuestions(questions) {
 //       .then(() => hideLoading());
 //   };
 // }
-// export function toggleTweet({ id, authedUser, hasLiked }) {
-//   return {
-//     type: TOGGLE_TWEET,
-//     id,
-//     authedUser,
-//     hasLiked,
-//   };
-// }
+export function submitQuestionAnswer({ id, authedUser, answer }) {
+  return {
+    type: SUBMIT_QUESTION,
+    id,
+    authedUser,
+    answer,
+  };
+}
 
-// export function handleToggleTweet(info) {
-//   return (dispatch) => {
-//     dispatch(toggleTweet(info));
-
-//     return saveLikeToggle(info).catch((e) => {
-//       console.warn("Error in handleToggleTweet: ", e);
-//       dispatch(toggleTweet(info));
-//       alert("There was an error in linking the tweet. Try again");
-//     });
-//   };
-// }
+export function handleSubmitQuestionAnswer(info) {
+  return (dispatch) => {
+    console.log(info);
+    dispatch(submitQuestionAnswer(info));
+  };
+}

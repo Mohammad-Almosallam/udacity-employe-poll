@@ -17,9 +17,10 @@ import React from "react";
 import Nav from "./Nav";
 import { withRouter, formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
+import { handleSubmitQuestionAnswer } from "../actions/questions";
 function PollPage(props) {
   const { name, hasAnswered, avatar, optionOne, optionTwo } = props.question;
-  console.log(props);
+
   function calcPercentage(numOfVotes) {
     const numOptionOneVotes = optionOne.votes.length;
     const numOptionTwoVotes = optionTwo.votes.length;
@@ -29,6 +30,18 @@ function PollPage(props) {
     return Math.floor((numOfVotes / total) * 100);
   }
 
+  function handleBtnSubmit(e, answerValue) {
+    e.preventDefault();
+    const { authedUser, dispatch, question } = props;
+    console.log(authedUser, question.id, answerValue);
+    dispatch(
+      handleSubmitQuestionAnswer({
+        authedUser: authedUser,
+        id: question.id,
+        answer: answerValue,
+      })
+    );
+  }
   return (
     <>
       <Nav />
@@ -65,6 +78,9 @@ function PollPage(props) {
               </InputGroup>
               <Button
                 isDisabled={hasAnswered}
+                onClick={(e) => {
+                  handleBtnSubmit(e, "optionOne");
+                }}
                 colorScheme={
                   optionOne.votes.includes(props.authedUser)
                     ? "green"
@@ -88,6 +104,9 @@ function PollPage(props) {
               </InputGroup>
               <Button
                 isDisabled={hasAnswered}
+                onClick={(e) => {
+                  handleBtnSubmit(e, "optionTwo");
+                }}
                 colorScheme={
                   optionTwo.votes.includes(props.authedUser)
                     ? "green"
