@@ -11,6 +11,7 @@ import {
   TableContainer,
   Box,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import { connect } from "react-redux";
 function Leaderboard(props) {
@@ -32,12 +33,8 @@ function Leaderboard(props) {
               {props.rankOrderIds.map((id, index) => {
                 return (
                   <Tr key={index}>
-                    <Td
-                      display={"flex"}
-                      fontWeight={"bold"}
-                      alignItems="center"
-                    >
-                      <Image w={"40px"} src={props.users[id].avatarURL} />{" "}
+                    <Td display={"flex"} alignItems="center">
+                      <Image w={"55px"} src={props.users[id].avatarURL} />{" "}
                       {props.users[id].name}
                     </Td>
                     <Td isNumeric>

@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import React from "react";
 import { connect } from "react-redux";
 import Poll from "./Poll";
+import Gradient from "./Gradient";
 function Home(props) {
   const doneFilteredQuestions = props.hasDone.reduce(
     (object, key) => Object.assign(object, { [key.qId]: key.status }),
@@ -12,7 +13,8 @@ function Home(props) {
     <>
       <Nav />
 
-      <Box w={"70%"} margin={"auto"}>
+      <Box w={"70%"} pos={"relative"} margin={"auto"}>
+        {/* <Gradient /> */}
         <Flex gap={"2rem"} flexDir={"column"}>
           <Box
             border={"1px solid "}
