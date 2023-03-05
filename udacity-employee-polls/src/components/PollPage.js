@@ -72,7 +72,6 @@ function PollPage(props) {
                   disabled
                   placeholder="mysite"
                   value={optionOne.text}
-                  color={"black"}
                   fontSize={"1.2rem"}
                 />
               </InputGroup>
@@ -98,7 +97,6 @@ function PollPage(props) {
                   disabled
                   placeholder="mysite"
                   value={optionTwo.text}
-                  color={"black"}
                   fontSize={"1.2rem"}
                 />
               </InputGroup>

@@ -19,9 +19,6 @@ function NewPoll(props) {
 
   function handleSubmitBtn(e) {
     e.preventDefault();
-
-    //TODO: actions and reducers
-    console.log(optionOneChoice, optionTwoChoice, props.authedUser);
     props.dispatch(
       handleSubmitNewQuestion({
         author: props.authedUser,
@@ -57,9 +54,7 @@ function NewPoll(props) {
                 <InputLeftAddon children="A" />
                 <Input
                   placeholder="Enter the first choice"
-                  color={"black"}
                   type={"text"}
-                  bgColor={"white"}
                   onChange={(e) => {
                     setOptionOneChoice(e.target.value);
                   }}
@@ -72,9 +67,7 @@ function NewPoll(props) {
                 <InputLeftAddon children="B" />
                 <Input
                   placeholder="Enter the second choice"
-                  color={"black"}
                   type={"text"}
-                  bgColor={"white"}
                   onChange={(e) => {
                     setOptionTwoChoice(e.target.value);
                   }}

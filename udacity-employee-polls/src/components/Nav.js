@@ -1,11 +1,25 @@
 import React from "react";
-import { Flex, Box, Text, Button, Image } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  Text,
+  Button,
+  Image,
+  useColorModeValue,
+  useColorMode,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { IoLogOutOutline } from "react-icons/io5";
+import {
+  IoLogOutOutline,
+  IoSunnyOutline,
+  IoMoonOutline,
+} from "react-icons/io5";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 
 function Nav(props) {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Box>
       <Flex alignItems={"center"} p={"2rem"} justifyContent={"space-between"}>
@@ -19,6 +33,16 @@ function Nav(props) {
             <Image src={props.avatarURL} w={"50px"} h={"50px"} />
             <Text>{props.loggedInUser}</Text>
           </Flex>
+          <Button
+            bg={"transparent"}
+            borderRadius={"50%"}
+            width="40px"
+            p={0}
+            _hover={{ backgroud: "transparent" }}
+            onClick={toggleColorMode}
+          >
+            {colorMode === "light" ? <IoMoonOutline /> : <IoSunnyOutline />}
+          </Button>
           <Link to="/login">
             <Button
               colorScheme={""}
