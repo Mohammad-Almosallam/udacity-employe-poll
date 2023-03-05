@@ -1,10 +1,11 @@
 import { saveQuestionAnswer, saveQuestion } from "../utils/api";
-import { submitUserAnswer } from "./users";
+import { submitUserAnswer, submitUserNewQuestion } from "./users";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const SUBMIT_QUESTION_ANSWER = "SUBMIT_QUESTION_ANSWER";
 export const SUBMIT_NEW_QUESTION = "SUBMIT_NEW_QUESTION";
-// export const ADD_TWEET = "ADD_TWEET";
+
+// -------------------- RECEIVING ALL QUESTIONS --------------------
 
 export function receiveQuestions(questions) {
   return {
@@ -12,8 +13,9 @@ export function receiveQuestions(questions) {
     questions,
   };
 }
+// -----------------------------------------------------------------
 
-//SUBMITTING NEW QUESTIONS
+// -------------------- SUBMITTING NEW QUESTIONS --------------------
 export function submitNewQuestion(question) {
   return {
     type: SUBMIT_NEW_QUESTION,
@@ -26,12 +28,13 @@ export function handleSubmitNewQuestion(info) {
     dispatch(showLoading());
     return saveQuestion(info)
       .then((question) => dispatch(submitNewQuestion(question)))
+      .then((question) => dispatch(submitUserNewQuestion(question)))
       .then(() => dispatch(hideLoading()));
   };
 }
+// -------------------------------------------------------------------
 
-//QUESTIONS ANSWERS SUBMISSION
-
+// -------------------- SUBMITTING ANSWER FOR A QUESTION --------------------
 export function submitQuestionAnswer({ qid, authedUser, answer }) {
   return {
     type: SUBMIT_QUESTION_ANSWER,
@@ -51,3 +54,4 @@ export function handleSubmitQuestionAnswer(info) {
       .then(() => dispatch(hideLoading()));
   };
 }
+// --------------------------------------------------------------------------
