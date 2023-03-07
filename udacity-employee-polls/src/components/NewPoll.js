@@ -10,7 +10,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { connect } from "react-redux";
-import Gradient from "./Gradient";
 import { handleSubmitNewQuestion } from "../actions/questions";
 
 function NewPoll(props) {
@@ -37,7 +36,6 @@ function NewPoll(props) {
         justifyContent={"center"}
       >
         <Flex w="70%" pos={"relative"} alignItems={"center"} flexDir={"column"}>
-          {/* <Gradient /> */}
           <Box>
             <Text fontSize={"5xl"} mt={"6rem"} fontWeight={"bold"}>
               ✨What question you want to ask?✨

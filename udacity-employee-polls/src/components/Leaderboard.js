@@ -11,7 +11,6 @@ import {
   TableContainer,
   Box,
   Image,
-  Text,
 } from "@chakra-ui/react";
 import { connect } from "react-redux";
 function Leaderboard(props) {

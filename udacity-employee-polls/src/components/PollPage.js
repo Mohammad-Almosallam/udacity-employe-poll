@@ -13,12 +13,25 @@ import {
   StatGroup,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "./Nav";
 import { withRouter, formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
 import { handleSubmitQuestionAnswer } from "../actions/questions";
+import { useNavigate } from "react-router-dom";
+
 function PollPage(props) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const flag = props.allQuestions.filter((eachQ) => {
+      return eachQ.id === props.id;
+    });
+    if (flag.length === 0) {
+      navigate("/error404", { replace: true });
+    }
+  }, []);
+
   const { name, hasAnswered, avatar, optionOne, optionTwo } = props.question;
 
   function calcPercentage(numOfVotes) {
@@ -71,7 +84,7 @@ function PollPage(props) {
                 <Input
                   disabled
                   placeholder="mysite"
-                  value={optionOne.text}
+                  value={optionOne === undefined ? "" : optionOne.text}
                   fontSize={"1.2rem"}
                 />
               </InputGroup>
@@ -81,7 +94,9 @@ function PollPage(props) {
                   handleBtnSubmit(e, "optionOne");
                 }}
                 colorScheme={
-                  optionOne.votes.includes(props.authedUser)
+                  optionOne === undefined
+                    ? ""
+                    : optionOne.votes.includes(props.authedUser)
                     ? "green"
                     : "facebook"
                 }
@@ -96,7 +111,7 @@ function PollPage(props) {
                 <Input
                   disabled
                   placeholder="mysite"
-                  value={optionTwo.text}
+                  value={optionTwo === undefined ? "" : optionTwo.text}
                   fontSize={"1.2rem"}
                 />
               </InputGroup>
@@ -106,7 +121,9 @@ function PollPage(props) {
                   handleBtnSubmit(e, "optionTwo");
                 }}
                 colorScheme={
-                  optionTwo.votes.includes(props.authedUser)
+                  optionTwo === undefined
+                    ? ""
+                    : optionTwo.votes.includes(props.authedUser)
                     ? "green"
                     : "facebook"
                 }
@@ -153,8 +170,10 @@ const mapStateToProps = ({ authedUser, questions, users }, props) => {
   return {
     question: question
       ? formatQuestion(question, users[question.author], authedUser)
-      : null,
+      : "",
     authedUser,
+    allQuestions: Object.values(questions),
+    id,
   };
 };
 export default withRouter(connect(mapStateToProps)(PollPage));

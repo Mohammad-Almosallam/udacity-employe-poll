@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Flex,
-  Box,
-  Text,
-  Button,
-  Image,
-  useColorModeValue,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Flex, Box, Text, Button, Image, useColorMode } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import {
   IoLogOutOutline,
@@ -43,20 +35,18 @@ function Nav(props) {
           >
             {colorMode === "light" ? <IoMoonOutline /> : <IoSunnyOutline />}
           </Button>
-          <Link to="/login">
-            <Button
-              colorScheme={""}
-              gap={"0.4rem"}
-              onClick={() => {
-                props.dispatch(setAuthedUser(""));
-              }}
-              backgroundColor={"black"}
-              color={"white"}
-            >
-              Logout
-              <IoLogOutOutline fontSize={"1.3rem"} />
-            </Button>
-          </Link>
+          <Button
+            colorScheme={""}
+            gap={"0.4rem"}
+            onClick={() => {
+              props.dispatch(setAuthedUser(""));
+            }}
+            backgroundColor={"black"}
+            color={"white"}
+          >
+            Logout
+            <IoLogOutOutline fontSize={"1.3rem"} />
+          </Button>
         </Flex>
       </Flex>
     </Box>

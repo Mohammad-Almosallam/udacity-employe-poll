@@ -10,17 +10,14 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
+import { withRouter } from "../utils/helper";
 import { IoChevronDown } from "react-icons/io5";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
-import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  const navigate = useNavigate();
-
   function setUser(userId) {
     props.dispatch(setAuthedUser(userId));
-    navigate("/");
   }
   return (
     <Flex
@@ -75,4 +72,4 @@ function mapStateToProps({ users }) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+export default withRouter(connect(mapStateToProps)(Login));

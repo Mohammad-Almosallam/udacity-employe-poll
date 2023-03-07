@@ -2,16 +2,18 @@ import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import LoadingBar from "react-redux-loading-bar";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import Home from "./Home";
 import NewPoll from "./NewPoll";
 import Leaderboard from "./Leaderboard";
 import Login from "./Login";
 import PollPage from "./PollPage";
+import ErrorPage from "./ErrorPage";
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData());
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -20,42 +22,19 @@ const App = (props) => {
         <LoadingBar />
         <Box>
           {props.loading === true ? null : (
-            <Routes>
-              <Route
-                path="/"
-                exact
-                element={
-                  <ProtectedRoute isAuthenticated={props.authedUser}>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/questions/:id"
-                element={
-                  <ProtectedRoute isAuthenticated={props.authedUser}>
-                    <PollPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/new"
-                element={
-                  <ProtectedRoute isAuthenticated={props.authedUser}>
-                    <NewPoll />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/leaderboard"
-                element={
-                  <ProtectedRoute isAuthenticated={props.authedUser}>
-                    <Leaderboard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/login" element={<Login />} />
-            </Routes>
+            <Box>
+              {props.authedUser === "" ? (
+                <Login />
+              ) : (
+                <Routes>
+                  <Route path="/" exact element={<Home />} />
+                  <Route path="/questions/:id" element={<PollPage />} />
+                  <Route path="/new" element={<NewPoll />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
+                  <Route path="/error404" element={<ErrorPage />} />
+                </Routes>
+              )}
+            </Box>
           )}
         </Box>
       </ChakraProvider>
@@ -63,20 +42,9 @@ const App = (props) => {
   );
 };
 
-const ProtectedRoute = ({
-  isAuthenticated,
-  redirectPath = "/login",
-  children,
-}) => {
-  if (!isAuthenticated) {
-    return <Navigate to={redirectPath} replace />;
-  }
-
-  return children;
-};
-
 const mapStateToProps = ({ authedUser }) => ({
   loading: authedUser === null,
   authedUser,
 });
+
 export default connect(mapStateToProps)(App);
