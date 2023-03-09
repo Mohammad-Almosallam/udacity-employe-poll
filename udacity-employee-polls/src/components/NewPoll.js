@@ -11,20 +11,26 @@ import {
 } from "@chakra-ui/react";
 import { connect } from "react-redux";
 import { handleSubmitNewQuestion } from "../actions/questions";
+import { useNavigate } from "react-router-dom";
 
 function NewPoll(props) {
+  const navigate = useNavigate();
   const [optionOneChoice, setOptionOneChoice] = useState();
   const [optionTwoChoice, setOptionTwoChoice] = useState();
 
   function handleSubmitBtn(e) {
     e.preventDefault();
-    props.dispatch(
-      handleSubmitNewQuestion({
-        author: props.authedUser,
-        optionOneText: optionOneChoice,
-        optionTwoText: optionTwoChoice,
-      })
-    );
+    props
+      .dispatch(
+        handleSubmitNewQuestion({
+          author: props.authedUser,
+          optionOneText: optionOneChoice,
+          optionTwoText: optionTwoChoice,
+        })
+      )
+      .then(() => {
+        navigate("/");
+      });
   }
 
   return (

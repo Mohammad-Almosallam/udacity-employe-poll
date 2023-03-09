@@ -18,7 +18,7 @@ function Nav(props) {
         <Flex gap={"2rem"}>
           <Link to="/">Home</Link>
           <Link to="/leaderboard">Leaderboard</Link>
-          <Link to="/new">New</Link>
+          <Link to="/add">New</Link>
         </Flex>
         <Flex alignItems={"center"} gap={"2rem"}>
           <Flex alignItems={"center"} gap={"1rem"}>
