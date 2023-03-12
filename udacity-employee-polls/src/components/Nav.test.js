@@ -35,7 +35,7 @@ describe("Nav", () => {
     );
     expect(component.queryByTestId("dark-btn")).toBeInTheDocument();
   });
-  it("should display the DarkMode button if logged-in", async () => {
+  it("should toggle the theme of website when clicked", async () => {
     await store.dispatch(handleInitialData());
     store.dispatch(setAuthedUser("zoshikanlu"));
 
