@@ -29,7 +29,7 @@ function PollPage(props) {
     });
     if (flag.length === 0) {
       navigate("/error404", { replace: true });
-    }
+    } // eslint-disable-next-line
   }, []);
 
   const { name, hasAnswered, avatar, optionOne, optionTwo } = props.question;
@@ -84,6 +84,7 @@ function PollPage(props) {
                 <Input
                   disabled
                   placeholder="mysite"
+                  data-testid="optionOneInput"
                   value={optionOne === undefined ? "" : optionOne.text}
                   fontSize={"1.2rem"}
                 />
@@ -111,6 +112,7 @@ function PollPage(props) {
                 <Input
                   disabled
                   placeholder="mysite"
+                  data-testid="optionTwoInput"
                   value={optionTwo === undefined ? "" : optionTwo.text}
                   fontSize={"1.2rem"}
                 />

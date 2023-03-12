@@ -28,10 +28,12 @@ function Nav(props) {
           <Button
             bg={"transparent"}
             borderRadius={"50%"}
+            data-testid="dark-btn"
             width="40px"
             p={0}
             _hover={{ backgroud: "transparent" }}
             onClick={toggleColorMode}
+            value={colorMode === "light" ? "light" : "dark"}
           >
             {colorMode === "light" ? <IoMoonOutline /> : <IoSunnyOutline />}
           </Button>

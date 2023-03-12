@@ -16,11 +16,10 @@ import {
 import { formatDate } from "../utils/helper";
 import { IoChevronForwardOutline } from "react-icons/io5";
 function Poll(props) {
-  const { name, timestamp, id, hasAnswered, avatar } = props.question;
-
   if (props.question === null) {
     return <h1>This question doesnt exist</h1>;
   }
+  const { name, timestamp, id, hasAnswered, avatar } = props.question;
 
   return (
     <Card pos={"relative"}>
