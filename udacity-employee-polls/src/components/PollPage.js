@@ -14,7 +14,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import Nav from "./Nav";
 import { withRouter, formatQuestion } from "../utils/helper";
 import { connect } from "react-redux";
 import { handleSubmitQuestionAnswer } from "../actions/questions";
