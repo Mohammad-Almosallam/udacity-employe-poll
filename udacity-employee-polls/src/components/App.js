@@ -33,7 +33,7 @@ const App = (props) => {
                   <Route path="/questions/:id" element={<PollPage />} />
                   <Route path="/add" element={<NewPoll />} />
                   <Route path="/leaderboard" element={<Leaderboard />} />
-                  <Route path="/error404" element={<ErrorPage />} />
+                  <Route path="*" element={<ErrorPage />} />
                 </Routes>
               )}
             </Box>

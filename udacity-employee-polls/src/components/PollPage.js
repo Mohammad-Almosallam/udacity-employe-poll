@@ -28,7 +28,7 @@ function PollPage(props) {
       return eachQ.id === props.id;
     });
     if (flag.length === 0) {
-      navigate("/error404", { replace: true });
+      navigate("*");
     } // eslint-disable-next-line
   }, []);
 
