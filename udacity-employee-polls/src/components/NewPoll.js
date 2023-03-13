@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Nav from "./Nav";
 import {
   InputLeftAddon,
   Input,
@@ -35,7 +34,6 @@ function NewPoll(props) {
 
   return (
     <>
-      <Nav />
       <Flex
         alignItems={"center"}
         textAlign={"center"}

@@ -10,6 +10,7 @@ import Leaderboard from "./Leaderboard";
 import Login from "./Login";
 import PollPage from "./PollPage";
 import ErrorPage from "./ErrorPage";
+import Nav from "./Nav";
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData());
@@ -20,6 +21,7 @@ const App = (props) => {
     <Fragment>
       <ChakraProvider>
         <LoadingBar />
+        <Nav />
         <Box>
           {props.loading === true ? null : (
             <Box>

@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "./Nav";
 import {
   Table,
   Thead,
@@ -14,10 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { connect } from "react-redux";
 function Leaderboard(props) {
-  console.log(props);
   return (
     <>
-      <Nav />
       <Box mt={"3rem"} w={"80%"} mx={"auto"}>
         <TableContainer>
           <Table variant="simple">

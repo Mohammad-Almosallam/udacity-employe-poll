@@ -11,7 +11,6 @@ import { setAuthedUser } from "../actions/authedUser";
 
 function Nav(props) {
   const { colorMode, toggleColorMode } = useColorMode();
-
   return (
     <Box>
       <Flex alignItems={"center"} p={"2rem"} justifyContent={"space-between"}>
@@ -21,10 +20,12 @@ function Nav(props) {
           <Link to="/add">New</Link>
         </Flex>
         <Flex alignItems={"center"} gap={"2rem"}>
-          <Flex alignItems={"center"} gap={"1rem"}>
-            <Image src={props.avatarURL} w={"50px"} h={"50px"} />
-            <Text>{props.loggedInUser}</Text>
-          </Flex>
+          {props.loggedInUser !== "" && (
+            <Flex alignItems={"center"} gap={"1rem"}>
+              <Image src={props.avatarURL} w={"50px"} h={"50px"} />
+              <Text>{props.loggedInUser}</Text>
+            </Flex>
+          )}
           <Button
             bg={"transparent"}
             borderRadius={"50%"}
@@ -37,18 +38,20 @@ function Nav(props) {
           >
             {colorMode === "light" ? <IoMoonOutline /> : <IoSunnyOutline />}
           </Button>
-          <Button
-            colorScheme={""}
-            gap={"0.4rem"}
-            onClick={() => {
-              props.dispatch(setAuthedUser(""));
-            }}
-            backgroundColor={"black"}
-            color={"white"}
-          >
-            Logout
-            <IoLogOutOutline fontSize={"1.3rem"} />
-          </Button>
+          {props.loggedInUser !== "" && (
+            <Button
+              colorScheme={""}
+              gap={"0.4rem"}
+              onClick={() => {
+                props.dispatch(setAuthedUser(""));
+              }}
+              backgroundColor={"black"}
+              color={"white"}
+            >
+              Logout
+              <IoLogOutOutline fontSize={"1.3rem"} />
+            </Button>
+          )}
         </Flex>
       </Flex>
     </Box>
@@ -58,7 +61,7 @@ function Nav(props) {
 const mapStateToProps = ({ authedUser, users }) => ({
   loggedInUser: authedUser,
   avatarURL:
-    authedUser !== null
+    authedUser !== null && authedUser !== ""
       ? Object.values(users).find((users) => users.id === authedUser).avatarURL
       : null,
 });

@@ -57,7 +57,6 @@ function PollPage(props) {
   }
   return (
     <>
-      <Nav />
       <Flex
         alignItems={"center"}
         textAlign={"center"}

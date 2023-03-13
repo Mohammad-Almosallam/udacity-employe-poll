@@ -1,5 +1,4 @@
 import { Box, Text, Flex, Divider, SimpleGrid } from "@chakra-ui/react";
-import Nav from "./Nav";
 import React from "react";
 import { connect } from "react-redux";
 import Poll from "./Poll";
@@ -10,8 +9,6 @@ function Home(props) {
   );
   return (
     <>
-      <Nav />
-
       <Box w={"70%"} pos={"relative"} margin={"auto"}>
         <Flex gap={"2rem"} flexDir={"column"}>
           <Box
