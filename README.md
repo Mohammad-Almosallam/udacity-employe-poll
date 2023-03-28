@@ -2,6 +2,8 @@
 
 My implementation of the final project for the Udacity React Nanodegree program is the "Employee Polls" project. It is a digital tool that enables staff members to take part in polls and surveys pertinent to their jobs. Workers have the ability to conduct their own polls, participate in polls produced by coworkers, and examine poll results.I have used React, Redux, and React Router to build this project, while the ChakraUI framework for the UI.
 
+# Live Demo:
+Link : https://employeepolls.vercel.app/
 
 # Installation
 To get started with the project right away:
