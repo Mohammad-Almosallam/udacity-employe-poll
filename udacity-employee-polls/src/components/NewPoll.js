@@ -50,7 +50,12 @@ function NewPoll(props) {
               Would you rather...
             </Text>
           </Box>
-          <Flex w={"100%"} mt={"2rem"} gap={"1rem"}>
+          <Flex
+            w={"100%"}
+            flexDir={{ base: "column", md: "row" }}
+            mt={"2rem"}
+            gap={"1rem"}
+          >
             <Flex w={"100%"} flexDir={"column"} gap={".5rem"}>
               <InputGroup size="md">
                 <InputLeftAddon children="A" />

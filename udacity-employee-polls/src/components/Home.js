@@ -1,9 +1,8 @@
-import { Box, Text, Flex, Divider, SimpleGrid, Switch } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Box, Text, Flex, Divider, SimpleGrid } from "@chakra-ui/react";
+import React from "react";
 import { connect } from "react-redux";
 import Poll from "./Poll";
 function Home(props) {
-  const [isChecked, setIsChecked] = useState(false);
   const doneFilteredQuestions = props.hasDone.reduce(
     (object, key) => Object.assign(object, { [key.qId]: key.status }),
     {}
@@ -12,75 +11,61 @@ function Home(props) {
     <>
       <Box w={"70%"} pos={"relative"} margin={"auto"}>
         <Flex gap={"2rem"} flexDir={"column"}>
-          <Flex>
-            <Text>Show answered polls </Text>
-            <Switch
-              onChange={(e) => {
-                setIsChecked(e.target.checked);
-              }}
-              colorScheme="teal"
-            />
-          </Flex>
-          {!isChecked && (
-            <Box
-              border={"1px solid "}
-              textAlign={"center"}
-              borderColor={"#d3d3d3"}
-              rounded={"10px"}
-              overflow={"hidden"}
+          <Box
+            border={"1px solid "}
+            textAlign={"center"}
+            borderColor={"#d3d3d3"}
+            rounded={"10px"}
+            overflow={"hidden"}
+          >
+            <Text my={"0.5rem"} fontSize={"3xl"} fontWeight={"bold"}>
+              New Questions ✨
+            </Text>
+            <Divider mb={"1rem"} />
+            <SimpleGrid
+              gap={"5"}
+              padding={"1rem"}
+              templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
             >
-              <Text my={"0.5rem"} fontSize={"3xl"} fontWeight={"bold"}>
-                New Questions ✨
-              </Text>
-              <Divider mb={"1rem"} />
-              <SimpleGrid
-                gap={"5"}
-                padding={"1rem"}
-                templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
-              >
-                {props.questionId.map((id) => {
-                  const hasDone = doneFilteredQuestions[id];
-                  if (!hasDone) {
-                    return <Poll key={id} id={id} />;
-                  }
-                  return "";
-                })}
-              </SimpleGrid>
-            </Box>
-          )}
-          {isChecked && (
-            <Box
-              border={"1px solid "}
-              textAlign={"center"}
-              borderColor={"#d3d3d3"}
-              rounded={"10px"}
-              overflow={"hidden"}
+              {props.questionId.map((id) => {
+                const hasDone = doneFilteredQuestions[id];
+                if (!hasDone) {
+                  return <Poll key={id} id={id} />;
+                }
+                return "";
+              })}
+            </SimpleGrid>
+          </Box>
+          <Box
+            border={"1px solid "}
+            textAlign={"center"}
+            borderColor={"#d3d3d3"}
+            rounded={"10px"}
+            overflow={"hidden"}
+          >
+            <Text my={"0.5rem"} fontSize={"3xl"} fontWeight={"bold"}>
+              Done ✅
+            </Text>
+            <Divider mb={"1rem"} />
+            <SimpleGrid
+              gap={"5"}
+              padding={"1rem"}
+              templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
             >
-              <Text my={"0.5rem"} fontSize={"3xl"} fontWeight={"bold"}>
-                Done ✅
-              </Text>
-              <Divider mb={"1rem"} />
-              <SimpleGrid
-                gap={"5"}
-                padding={"1rem"}
-                templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
-              >
-                {props.questionId.map((id) => {
-                  const hasDone = doneFilteredQuestions[id];
-                  if (hasDone) {
-                    return <Poll key={id} id={id} />;
-                  }
-                  return "";
-                })}
-              </SimpleGrid>
-            </Box>
-          )}
+              {props.questionId.map((id) => {
+                const hasDone = doneFilteredQuestions[id];
+                if (hasDone) {
+                  return <Poll key={id} id={id} />;
+                }
+                return "";
+              })}
+            </SimpleGrid>
+          </Box>
         </Flex>
       </Box>
     </>
   );
 }
-
 function mapStateToProps({ questions, authedUser }) {
   return {
     questionId: Object.keys(questions).sort((a, b) => {
@@ -98,5 +83,4 @@ function mapStateToProps({ questions, authedUser }) {
     }),
   };
 }
-
 export default connect(mapStateToProps)(Home);
